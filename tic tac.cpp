@@ -2,28 +2,28 @@
 using namespace std;
 
 char Board[3][3];
-char Current player;
+char currentPlayer;
 
 void initializeBoard()
 {
     char ch = '1';
-    for (i = 0; i < 3; i++)
+    for ( int i = 0; i < 3; i++)
     {
-        for (j = 0; j < 3; j++)
+        for (int j = 0; j < 3; j++)
         {
-            board[i][j] = ch++
+            Board[i][j] = ch++;
         }
     }
 }
 void DisplayBoard()
 {
-    cout << "/n";
-    for (i = 0; i < 3; i++)
+    cout << "\n";
+    for ( int i = 0; i < 3; i++)
     {
         cout << " ";
-        for (j = 0; j < 3; j++)
+        for (int j = 0; j < 3; j++)
         {
-            cout << Borad[i][j];
+            cout << Board[i][j];
             if (j < 2)
                 cout << " | ";
         }
@@ -35,28 +35,28 @@ void DisplayBoard()
 }
 
 void switchPlayer(){
-    currentplayer = (currentPlayer == 'X') ? 'O' : 'X';
+    currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
 }
 
 bool checkwin(){
     
     for(int i = 0; i < 3;i++){
-        if((board[i][0] == currentPlayer &&
-        if board[i][1] == currentPlayer &&
-        if board[i][2] == currentPlayer) ||
-        ( board[0][i] == currentPlayer &&
-          board[1][i] == currentPlayer &&
-          board[2][i] == currentPlayer)) 
+        if((Board[i][0] == currentPlayer &&
+           Board[i][1] == currentPlayer &&
+           Board[i][2] == currentPlayer) ||
+        ( Board[0][i] == currentPlayer &&
+          Board[1][i] == currentPlayer &&
+          Board[2][i] == currentPlayer)) 
           return true;
     }
 
  
-     if ((board[0][0] == currentPlayer &&
-         board[1][1] == currentPlayer &&
-         board[2][2] == currentPlayer) ||
-        (board[0][2] == currentPlayer &&
-         board[1][1] == currentPlayer &&
-         board[2][0] == currentPlayer))
+     if ((Board[0][0] == currentPlayer &&
+         Board[1][1] == currentPlayer &&
+         Board[2][2] == currentPlayer) ||
+        (Board[0][2] == currentPlayer &&
+         Board[1][1] == currentPlayer &&
+         Board[2][0] == currentPlayer))
         return true;
 
     return false;
@@ -65,7 +65,7 @@ bool checkwin(){
 bool checkDraw() {
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
-            if (board[i][j] != 'X' && board[i][j] != 'O')
+            if (Board[i][j] != 'X' && Board[i][j] != 'O')
                 return false;
     return true;
 }
@@ -79,11 +79,11 @@ void makeMove() {
     int row = (choice - 1) / 3;
     int col = (choice - 1) % 3;
 
-    if (choice < 1 || choice > 9 || board[row][col] == 'X' || board[row][col] == 'O') {
+    if (choice < 1 || choice > 9 || Board[row][col] == 'X' || Board[row][col] == 'O') {
         cout << "Invalid move! Try again.\n";
         makeMove();
     } else {
-        board[row][col] = currentPlayer;
+        Board[row][col] = currentPlayer;
     }
 }
 int main(){
@@ -95,16 +95,16 @@ int main(){
         bool gameOver = false;
 
         while (!gameOver) {
-            displayBoard();
+            DisplayBoard();
             makeMove();
 
-            if (checkWin()) {
-                displayBoard();
-                cout << "?? Player " << currentPlayer << " wins!\n";
+            if (checkwin()) {
+                DisplayBoard();
+                cout << " Player " << currentPlayer << " wins!\n";
                 gameOver = true;
             } else if (checkDraw()) {
-                displayBoard();
-                cout << "?? It's a draw!\n";
+                DisplayBoard();
+                cout << " It's a draw!\n";
                 gameOver = true;
             } else {
                 switchPlayer();
